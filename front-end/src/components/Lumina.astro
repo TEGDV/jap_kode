@@ -4,10 +4,10 @@ import Icon from "../components/Icon.astro";
 
 <div id="assistant" class="assistant-indicator pulse"></div>
 <div id="chat" class="chat" hidden>
-  <div class="close-x">
-    <Icon icon="close" size="1.33em" />
+  <div class="close-x" id="close">
+    <Icon icon="close" size="1.35em" />
   </div>
-  <img src="/assets/Lumina_Final.png" alt="Avatar" class="avatar" />
+  <img src="/assets/LuminaAlt.png" alt="Avatar" class="avatar" />
   <!-- Avatar Image -->
   <div class="message-area">
     <!-- Example Messages -->
@@ -26,6 +26,7 @@ import Icon from "../components/Icon.astro";
 </div>
 <script>
   document.getElementById("assistant")?.addEventListener("click", toggleLumina);
+  document.getElementById("close")?.addEventListener("click", toggleLumina);
   function toggleLumina() {
     let luminaButton = document.querySelector(".assistant-indicator");
     let assistantButton = document.getElementById("assistant");
@@ -72,48 +73,31 @@ import Icon from "../components/Icon.astro";
     animation: expandPulse 800ms infinite;
   }
 
-  /* Add a new class for the image background */
-  .chatElement {
-    background-color: linear-gradient(
-      135deg,
-      #7611a6,
-      #8c42bd,
-      #a173d1,
-      #bfa2e0
-    ); /* Gradient background */
-    background-image: url("/assets/LuminaAlt.png");
-    background-size: 30%;
-    background-position: top;
-    background-repeat: no-repeat;
-    animation: fadeInBottomToTop 800ms reverse;
-    width: 25vw;
-    height: 30vh;
-    border-radius: 0;
-  }
-
   .close-x {
     position: absolute;
     top: 5px;
     right: 5px;
+    color: var(--accent-regular);
+    cursor: pointer;
   }
+
   .chat {
     position: absolute;
     bottom: 30px;
     right: 40px;
-    width: 40px;
-    height: 40px;
     width: 25vw;
     height: 35vh;
+    min-height: 400px;
+    min-width: 300px;
     margin: auto;
     border: 1px solid #8c42bd; /* Secondary Color */
     padding: 10px;
     box-shadow: 0 2px 4px #5c0d8a; /* Complementary Color for shadow */
-    color: #bfa2e0; /* Accent Color 2 for text */
     z-index: 10000;
     background-image: url("/assets/backgrounds/noise.png");
     background: radial-gradient(var(--gray-900), var(--gray-800) 150%);
     border-radius: 5px;
-    animation: Scaling 1s ease-in;
+    /* animation: Scaling 1s ease-in; */
     font-size: var(--text-sm);
   }
   .avatar {
@@ -126,7 +110,7 @@ import Icon from "../components/Icon.astro";
   }
 
   .message-area {
-    height: 200px;
+    height: 70%;
     overflow-y: auto;
     border: 1px solid var(--accent-regular);
     padding: 5px;
@@ -139,7 +123,7 @@ import Icon from "../components/Icon.astro";
     margin: 5px 0;
     border-radius: 10px;
     max-width: 70%;
-    color: #5c0d8a; /* Accent Color 2 for text */
+    color: var(--gray-200);
   }
 
   .bot-message {
@@ -171,13 +155,13 @@ import Icon from "../components/Icon.astro";
     padding: 5px;
     border: none;
     border-radius: 5px;
-    background-color: #a173d1; /* Accent Color 1 */
-    color: white;
+    background-color: var(--accent-regular);
+    color: var(--gray-200);
     cursor: pointer;
   }
 
   .send-button:hover {
-    background-color: #8c42bd; /* Secondary Color */
+    background-color: var(--accent-regular);
   }
 
   @keyframes fadeInBottomToTop {
