@@ -1,0 +1,212 @@
+---
+import Icon from "../components/Icon.astro";
+---
+
+<div id="assistant" class="assistant-indicator pulse"></div>
+<div id="chat" class="chat" hidden>
+  <div class="close-x">
+    <Icon icon="close" size="1.33em" />
+  </div>
+  <img src="/assets/Lumina_Final.png" alt="Avatar" class="avatar" />
+  <!-- Avatar Image -->
+  <div class="message-area">
+    <!-- Example Messages -->
+    <div class="message bot-message">Hello! I'm a bot.</div>
+    <div class="message user-message">Hi there!</div>
+    <!-- Messages will be added here -->
+  </div>
+
+  <input
+    type="text"
+    id="messageInput"
+    class="message-input"
+    placeholder="Type your message..."
+  />
+  <button onclick="sendMessage()" class="send-button">Send</button>
+</div>
+<script>
+  document.getElementById("assistant")?.addEventListener("click", toggleLumina);
+  function toggleLumina() {
+    let luminaButton = document.querySelector(".assistant-indicator");
+    let assistantButton = document.getElementById("assistant");
+    let chatElement = document.getElementById("chat");
+
+    if (chatElement != undefined && assistantButton != undefined) {
+      chatElement.hidden = chatElement.hidden ? false : true;
+      assistantButton.hidden = assistantButton.hidden ? false : true;
+    }
+
+    console.log("Toggling IA Assistant");
+    luminaButton?.classList.add("image-background");
+    luminaButton?.classList.toggle("pulse");
+  }
+</script>
+<style>
+  .assistant-indicator {
+    position: fixed;
+    z-index: 10000;
+    bottom: 30px;
+    right: 40px;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(
+      135deg,
+      #7611a6,
+      #8c42bd,
+      #a173d1,
+      #bfa2e0
+    ); /* Gradient background */
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .pulse::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border: 2px solid #8c42bd;
+    border-radius: 50%;
+    animation: expandPulse 800ms infinite;
+  }
+
+  /* Add a new class for the image background */
+  .chatElement {
+    background-color: linear-gradient(
+      135deg,
+      #7611a6,
+      #8c42bd,
+      #a173d1,
+      #bfa2e0
+    ); /* Gradient background */
+    background-image: url("/assets/LuminaAlt.png");
+    background-size: 30%;
+    background-position: top;
+    background-repeat: no-repeat;
+    animation: fadeInBottomToTop 800ms reverse;
+    width: 25vw;
+    height: 30vh;
+    border-radius: 0;
+  }
+
+  .close-x {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
+  .chat {
+    position: absolute;
+    bottom: 30px;
+    right: 40px;
+    width: 40px;
+    height: 40px;
+    width: 25vw;
+    height: 35vh;
+    margin: auto;
+    border: 1px solid #8c42bd; /* Secondary Color */
+    padding: 10px;
+    box-shadow: 0 2px 4px #5c0d8a; /* Complementary Color for shadow */
+    color: #bfa2e0; /* Accent Color 2 for text */
+    z-index: 10000;
+    background-image: url("/assets/backgrounds/noise.png");
+    background: radial-gradient(var(--gray-900), var(--gray-800) 150%);
+    border-radius: 5px;
+    animation: Scaling 1s ease-in;
+    font-size: var(--text-sm);
+  }
+  .avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto 10px;
+    border: 1px solid var(--accent-regular);
+  }
+
+  .message-area {
+    height: 200px;
+    overflow-y: auto;
+    border: 1px solid var(--accent-regular);
+    padding: 5px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+
+  .message {
+    padding: 5px 10px;
+    margin: 5px 0;
+    border-radius: 10px;
+    max-width: 70%;
+    color: #5c0d8a; /* Accent Color 2 for text */
+  }
+
+  .bot-message {
+    color: var(--accent-text-over);
+    border: 1px solid var(--accent-regular);
+    background-color: var(--accent-regular);
+    align-self: flex-start;
+  }
+
+  .user-message {
+    background: var(--gray-900);
+    color: var(--gray-200);
+    border: 1px solid var(--accent-regular);
+    align-self: flex-end;
+    margin-left: auto;
+  }
+
+  .message-input {
+    width: calc(100% - 60px);
+    padding: 5px;
+    background: var(--gray-900);
+    color: var(--gray-200);
+    border: 1px solid var(--accent-regular);
+    border-radius: 5px;
+  }
+
+  .send-button {
+    width: 50px;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #a173d1; /* Accent Color 1 */
+    color: white;
+    cursor: pointer;
+  }
+
+  .send-button:hover {
+    background-color: #8c42bd; /* Secondary Color */
+  }
+
+  @keyframes fadeInBottomToTop {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes Scaling {
+    from {
+      opacity: 0.2;
+      transform: scale(0);
+    }
+    to {
+      opacity: 0.9;
+      transform: scale(1);
+    }
+  }
+  @keyframes expandPulse {
+    0% {
+      transform: scale(0.7);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1.2);
+      opacity: 0;
+    }
+  }
+</style>
